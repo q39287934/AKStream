@@ -135,16 +135,24 @@ namespace AKStreamKeeper
                     if (KeeperPerformanceInfo.SystemType.Trim().ToUpper().Equals("WINDOWS"))
                     {
                         var rootPath = Path.GetPathRoot(path).ToUpper();
-                        rootPath = rootPath.Split('/', StringSplitOptions.RemoveEmptyEntries)[0];
-                        rootPath = rootPath.Split('\\', StringSplitOptions.RemoveEmptyEntries)[0];
+                        if (rootPath != "/" && rootPath != "\\")
+                        {
+                            rootPath = rootPath.Split('/', StringSplitOptions.RemoveEmptyEntries)[0];
+                            rootPath = rootPath.Split('\\', StringSplitOptions.RemoveEmptyEntries)[0];
+                        }
+
                         rootPath = rootPath.TrimEnd(':');
                         foreach (var drv in KeeperPerformanceInfo.DriveInfo)
                         {
                             if (drv != null && drv.IsReady == true && !string.IsNullOrEmpty(drv.Name))
                             {
                                 var drvPath = Path.GetPathRoot(drv.Name).ToUpper();
-                                drvPath = drvPath.Split('/', StringSplitOptions.RemoveEmptyEntries)[0];
-                                drvPath = drvPath.Split('\\', StringSplitOptions.RemoveEmptyEntries)[0];
+                                if (drvPath != "/" && drvPath != "\\")
+                                {
+                                    drvPath = drvPath.Split('/', StringSplitOptions.RemoveEmptyEntries)[0];
+                                    drvPath = drvPath.Split('\\', StringSplitOptions.RemoveEmptyEntries)[0];
+                                }
+
                                 drvPath = drvPath.TrimEnd(':');
                                 if (drvPath.Equals(rootPath))
                                 {
@@ -691,23 +699,23 @@ namespace AKStreamKeeper
 #endif
             ResponseStruct rs;
             startTimer();
-            var ret = ReadConfig(out rs);
-            if (!ret || !rs.Code.Equals(ErrorNumber.None))
-            {
-                Logger.Error(
-                    $"[{LoggerHead}]->获取AKStreamKeeper配置文件时异常,系统无法运行->\r\n{JsonHelper.ToJson(rs, Formatting.Indented)}");
-                Environment.Exit(0); //退出程序 
-            }
+            //var ret = ReadConfig(out rs);
+            //if (!ret || !rs.Code.Equals(ErrorNumber.None))
+            //{
+            //    Logger.Error(
+            //        $"[{LoggerHead}]->获取AKStreamKeeper配置文件时异常,系统无法运行->\r\n{JsonHelper.ToJson(rs, Formatting.Indented)}");
+            //    Environment.Exit(0); //退出程序 
+            //}
 
-            ret = UtilsHelper.CheckFFmpegBin(_akStreamKeeperConfig.FFmpegPath);
-            if (!ret)
-            {
-                Logger.Error(
-                    $"[{LoggerHead}]->检测发现FFmpeg可执行文件{_akStreamKeeperConfig.FFmpegPath}不存在或者无法正常运行,系统无法运行");
-                Environment.Exit(0); //退出程序 
-            }
+            //ret = UtilsHelper.CheckFFmpegBin(_akStreamKeeperConfig.FFmpegPath);
+            //if (!ret)
+            //{
+            //    Logger.Error(
+            //        $"[{LoggerHead}]->检测发现FFmpeg可执行文件{_akStreamKeeperConfig.FFmpegPath}不存在或者无法正常运行,系统无法运行");
+            //    Environment.Exit(0); //退出程序 
+            //}
 
-            ProcessHelper.KillProcess(_akStreamKeeperConfig.MediaServerPath); //启动前先删除掉所有流媒体进程
+            //ProcessHelper.KillProcess(_akStreamKeeperConfig.MediaServerPath); //启动前先删除掉所有流媒体进程
             while (StartupMediaServer() <= 0)
             {
                 Logger.Error(

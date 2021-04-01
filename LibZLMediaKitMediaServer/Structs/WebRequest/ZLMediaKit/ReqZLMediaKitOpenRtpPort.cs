@@ -7,7 +7,7 @@ namespace LibZLMediaKitMediaServer.Structs.WebRequest.ZLMediaKit
     public class ReqZLMediaKitOpenRtpPort : ReqZLMediaKitRequestBase
     {
         private ushort? _port;
-        private bool? _enable_tcp;
+        private int? _enable_tcp;
         private string? _stream_id;
 
         [JsonIgnore]
@@ -18,7 +18,7 @@ namespace LibZLMediaKitMediaServer.Structs.WebRequest.ZLMediaKit
         }
 
         [JsonIgnore]
-        public bool? Enable_Tcp
+        public int? Enable_Tcp
         {
             get => _enable_tcp;
             set => _enable_tcp = value;
