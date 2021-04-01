@@ -69,9 +69,9 @@ namespace AKStreamWeb.Services
                     }
 
                     DateTime startInDb =
-                        DateTime.Parse(((DateTime) videoList[i].StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                        DateTime.Parse(((DateTime)videoList[i].StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
                     DateTime endInDb =
-                        DateTime.Parse(((DateTime) videoList[i].EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                        DateTime.Parse(((DateTime)videoList[i].EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
 
 
                     long dbstart = UtilsHelper.ConvertDateTimeToLong(startInDb);
@@ -114,7 +114,7 @@ namespace AKStreamWeb.Services
                     for (int i = 0; i <= videoList.Count - 1; i++)
                     {
                         tmpStartList.Add(new KeyValuePair<int, double>(i,
-                            Math.Abs(((DateTime) videoList[i]!.StartTime!).Subtract(_start)
+                            Math.Abs(((DateTime)videoList[i]!.StartTime!).Subtract(_start)
                                 .TotalMilliseconds))); //对所有视频做开始时间减需的开始时间，取绝对值
                     }
 
@@ -122,7 +122,7 @@ namespace AKStreamWeb.Services
                     {
                         if (left.Value > right.Value)
                             return 1;
-                        else if ((int) left.Value == (int) right.Value)
+                        else if ((int)left.Value == (int)right.Value)
                             return 0;
                         else
                             return -1;
@@ -152,7 +152,7 @@ namespace AKStreamWeb.Services
                     for (int i = 0; i <= videoList.Count - 1; i++)
                     {
                         tmpEndList.Add(new KeyValuePair<int, double>(i,
-                            Math.Abs(((DateTime) videoList[i]!.EndTime!).Subtract(_end)
+                            Math.Abs(((DateTime)videoList[i]!.EndTime!).Subtract(_end)
                                 .TotalMilliseconds))); //上上面一样，取绝对值
                     }
 
@@ -160,7 +160,7 @@ namespace AKStreamWeb.Services
                     {
                         if (left.Value > right.Value)
                             return 1;
-                        else if ((int) left.Value == (int) right.Value)
+                        else if ((int)left.Value == (int)right.Value)
                             return 0;
                         else
                             return -1;
@@ -199,9 +199,9 @@ namespace AKStreamWeb.Services
                     tmpStruct.StartTime = cutMegerList[0].StartTime;
                     var tmpCutMeger = cutMegerList[0];
                     DateTime tmpCutMegerStartTime =
-                        DateTime.Parse(((DateTime) tmpCutMeger.StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                        DateTime.Parse(((DateTime)tmpCutMeger.StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
                     DateTime tmpCutMegerEndTime =
-                        DateTime.Parse(((DateTime) tmpCutMeger.EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                        DateTime.Parse(((DateTime)tmpCutMeger.EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
                     if (tmpCutMegerStartTime <= _start)
                     {
                         TimeSpan ts = -tmpCutMegerStartTime.Subtract(_start); //视频的开始时间减去需要的开始时间，再取反
@@ -250,9 +250,9 @@ namespace AKStreamWeb.Services
                         if (tmpCutMeger != null && i == 0) //看第一个文件是否需要裁剪
                         {
                             DateTime tmpCutMegerStartTime =
-                                DateTime.Parse(((DateTime) tmpCutMeger.StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                                DateTime.Parse(((DateTime)tmpCutMeger.StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
                             DateTime tmpCutMegerEndTime =
-                                DateTime.Parse(((DateTime) tmpCutMeger.EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                                DateTime.Parse(((DateTime)tmpCutMeger.EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
 
                             if (tmpCutMegerStartTime < _start && tmpCutMegerEndTime > _start
                             ) //如果视频开始时间大于需要的开始时间，而视频结束时间大于需要的开始时间
@@ -303,9 +303,9 @@ namespace AKStreamWeb.Services
                         else if (tmpCutMeger != null && i == cutMegerList.Count - 1) //处理最后一个视频，看是否需要裁剪，后续操作同上
                         {
                             DateTime tmpCutMegerStartTime =
-                                DateTime.Parse(((DateTime) tmpCutMeger.StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                                DateTime.Parse(((DateTime)tmpCutMeger.StartTime!).ToString("yyyy-MM-dd HH:mm:ss"));
                             DateTime tmpCutMegerEndTime =
-                                DateTime.Parse(((DateTime) tmpCutMeger.EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
+                                DateTime.Parse(((DateTime)tmpCutMeger.EndTime!).ToString("yyyy-MM-dd HH:mm:ss"));
                             if (tmpCutMegerEndTime > _end)
                             {
                                 TimeSpan ts = tmpCutMegerEndTime.Subtract(_end);
@@ -648,8 +648,8 @@ namespace AKStreamWeb.Services
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.MediaServerId.Equals(req.MediaServerId) &&
                                                                    x.IpV4Address.Equals(req.VideoChannelIp)
                                                                    && x.MainId.Equals(req.MainId)).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.MediaServerId.Equals(req.MediaServerId) &&
                                                                   x.IpV4Address.Equals(req.VideoChannelIp)
                                                                   && x.MainId.Equals(req.MainId));
@@ -669,8 +669,8 @@ namespace AKStreamWeb.Services
                 {
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.MediaServerId.Equals(req.MediaServerId)
                                                                    && x.MainId.Equals(req.MainId)).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.MediaServerId.Equals(req.MediaServerId)
                                                                   && x.MainId.Equals(req.MainId));
                 }
@@ -689,8 +689,8 @@ namespace AKStreamWeb.Services
                 {
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.IpV4Address.Equals(req.VideoChannelIp)
                                                                    && x.MainId.Equals(req.MainId)).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.IpV4Address.Equals(req.VideoChannelIp)
                                                                   && x.MainId.Equals(req.MainId));
                 }
@@ -711,8 +711,8 @@ namespace AKStreamWeb.Services
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.MediaServerId.Equals(req.MediaServerId)
                                                                    && x.IpV4Address.Equals(req.VideoChannelIp)
                         ).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.MediaServerId.Equals(req.MediaServerId)
                                                                   && x.IpV4Address.Equals(req.VideoChannelIp));
                 }
@@ -730,8 +730,8 @@ namespace AKStreamWeb.Services
                 {
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.IpV4Address.Equals(req.VideoChannelIp)
                         ).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.IpV4Address.Equals(req.VideoChannelIp));
                 }
             }
@@ -746,8 +746,8 @@ namespace AKStreamWeb.Services
                 else
                 {
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.MainId.Equals(req.MainId)).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.MainId.Equals(req.MainId));
                 }
             }
@@ -764,8 +764,8 @@ namespace AKStreamWeb.Services
                 {
                     retList = Common.Ldb.VideoOnlineInfo.Find(x => x.MediaServerId.Equals(req.MediaServerId)
                         ).ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count(x => x.MediaServerId.Equals(req.MediaServerId));
                 }
             }
@@ -780,8 +780,8 @@ namespace AKStreamWeb.Services
                 else
                 {
                     retList = Common.Ldb.VideoOnlineInfo.FindAll().ToList()
-                        .Skip(((int) req.PageIndex - 1) * (int) req.PageSize)
-                        .Take((int) req.PageSize).ToList();
+                        .Skip(((int)req.PageIndex - 1) * (int)req.PageSize)
+                        .Take((int)req.PageSize).ToList();
                     count = Common.Ldb.VideoOnlineInfo.Count();
                 }
             }
@@ -1263,7 +1263,7 @@ namespace AKStreamWeb.Services
                 return null;
             }
 
-            ReqForWebHookOnStreamChange onStreamChangeWebhook = (ReqForWebHookOnStreamChange) taskWait.OtherObj;
+            ReqForWebHookOnStreamChange onStreamChangeWebhook = (ReqForWebHookOnStreamChange)taskWait.OtherObj;
             var videoChannelMediaInfo = new VideoChannelMediaInfo();
             videoChannelMediaInfo.App = videoChannel.App;
             videoChannelMediaInfo.Enabled = videoChannel.Enabled;
@@ -1301,7 +1301,7 @@ namespace AKStreamWeb.Services
             videoChannelMediaInfo.MediaServerStreamInfo.PlayerList = new List<MediaServerStreamPlayerInfo>();
             videoChannelMediaInfo.MediaServerStreamInfo.StartTime = DateTime.Now;
             videoChannelMediaInfo.MediaServerStreamInfo.RptPort = null;
-            videoChannelMediaInfo.MediaServerStreamInfo.StreamPort = (ushort) new Uri(videoChannel.VideoSrcUrl).Port;
+            videoChannelMediaInfo.MediaServerStreamInfo.StreamPort = (ushort)new Uri(videoChannel.VideoSrcUrl).Port;
             videoChannelMediaInfo.MediaServerStreamInfo.MediaServerId = mediaServerId;
             videoChannelMediaInfo.MediaServerStreamInfo.MediaServerIp = mediaServer.IpV4Address;
             videoChannelMediaInfo.MediaServerStreamInfo.PushSocketType = videoChannel.RtpWithTcp == true
@@ -1366,7 +1366,7 @@ namespace AKStreamWeb.Services
             bool recorded = false;
             if (retobj != null)
             {
-                recorded = (bool) retobj.MediaServerStreamInfo.IsRecorded;
+                recorded = (bool)retobj.MediaServerStreamInfo.IsRecorded;
                 Common.Ldb.VideoOnlineInfo.DeleteMany(x => x.MainId.Equals(videoChannelMediaInfo.MainId)
                                                            && x.MediaServerId.Equals(videoChannelMediaInfo
                                                                .MediaServerId));
@@ -1537,7 +1537,7 @@ namespace AKStreamWeb.Services
                 return null;
             }
 
-            ReqForWebHookOnStreamChange onStreamChangeWebhook = (ReqForWebHookOnStreamChange) taskWait.OtherObj;
+            ReqForWebHookOnStreamChange onStreamChangeWebhook = (ReqForWebHookOnStreamChange)taskWait.OtherObj;
             var videoChannelMediaInfo = new VideoChannelMediaInfo();
             videoChannelMediaInfo.App = videoChannel.App;
             videoChannelMediaInfo.Enabled = videoChannel.Enabled;
@@ -1575,7 +1575,7 @@ namespace AKStreamWeb.Services
             videoChannelMediaInfo.MediaServerStreamInfo.PlayerList = new List<MediaServerStreamPlayerInfo>();
             videoChannelMediaInfo.MediaServerStreamInfo.StartTime = DateTime.Now;
             videoChannelMediaInfo.MediaServerStreamInfo.RptPort = null;
-            videoChannelMediaInfo.MediaServerStreamInfo.StreamPort = (ushort) new Uri(videoChannel.VideoSrcUrl).Port;
+            videoChannelMediaInfo.MediaServerStreamInfo.StreamPort = (ushort)new Uri(videoChannel.VideoSrcUrl).Port;
             videoChannelMediaInfo.MediaServerStreamInfo.MediaServerId = mediaServerId;
             videoChannelMediaInfo.MediaServerStreamInfo.MediaServerIp = mediaServer.IpV4Address;
             videoChannelMediaInfo.MediaServerStreamInfo.PushSocketType = videoChannel.RtpWithTcp == true
@@ -1639,7 +1639,7 @@ namespace AKStreamWeb.Services
             bool recorded = false;
             if (retobj != null)
             {
-                recorded = (bool) retobj.MediaServerStreamInfo.IsRecorded;
+                recorded = (bool)retobj.MediaServerStreamInfo.IsRecorded;
                 Common.Ldb.VideoOnlineInfo.DeleteMany(x => x.MainId.Equals(videoChannelMediaInfo.MainId)
                                                            && x.MediaServerId.Equals(videoChannelMediaInfo
                                                                .MediaServerId));
@@ -1763,7 +1763,7 @@ namespace AKStreamWeb.Services
                 {
                     if (left.Key > right.Key)
                         return 0;
-                    if ((int) left.Key == (int) right.Key)
+                    if ((int)left.Key == (int)right.Key)
                     {
                         return 1;
                     }
@@ -1875,7 +1875,7 @@ namespace AKStreamWeb.Services
 
             var result = new ResMediaServerOpenRtpPort()
             {
-                Port = (ushort) zlRet.Port,
+                Port = (ushort)zlRet.Port,
                 Stream = stream,
             };
             Logger.Info($"[{Common.LoggerHead}]->请求开放rtp端口成功->{mediaServerId}->{stream}->{JsonHelper.ToJson(result)}");
@@ -2763,7 +2763,7 @@ namespace AKStreamWeb.Services
                             x => x.PDepartmentName.Equals(req.PDepartmentName))
                         .OrderBy(orderBy)
                         .Count(out total)
-                        .Page((int) req.PageIndex!, (int) req.PageSize!)
+                        .Page((int)req.PageIndex!, (int)req.PageSize!)
                         .ToList();
                 }
                 else
@@ -3069,7 +3069,7 @@ namespace AKStreamWeb.Services
                             x => x.PDepartmentId.Equals(req.DepartmentId))
                         .OrderBy(orderBy)
                         .Count(out total)
-                        .Page((int) req.PageIndex!, (int) req.PageSize!)
+                        .Page((int)req.PageIndex!, (int)req.PageSize!)
                         .ToList();
                 }
                 else
@@ -3707,7 +3707,7 @@ namespace AKStreamWeb.Services
                         .Where(x => x.Enabled == false).Where(x => x.MediaServerId.Contains("unknown_server"))
                         .OrderBy(orderBy)
                         .Count(out total)
-                        .Page((int) req.PageIndex!, (int) req.PageSize!)
+                        .Page((int)req.PageIndex!, (int)req.PageSize!)
                         .ToList();
                 }
             }
